@@ -2,7 +2,7 @@
 pragma solidity >=0.4.22 <0.9.0;
 
 
-// TODO: Can change here to make it struct and eliminate the need of mysql to store info and metadata
+// TO DO: Can change here to make it struct and eliminate the need of mysql to store info and metadata
 struct Paper {
     string timestamp;
     address userId;
@@ -11,16 +11,14 @@ struct Paper {
     string title;
     string description;
     bool dayCompleted;
-}
-
+    }
 
 contract PublishPaper{
-    // mapping of cid with user's account id
+   // mapping of cid with user's account id
     mapping (string => address) paperToOwner;
     mapping ( string => uint) cidToPaperIndex; 
     Paper[] papers;
     uint paperIndex = 0;
-
 
     function onlyOwner(string calldata cid) view public {
         require(msg.sender == paperToOwner[cid]);
@@ -45,10 +43,10 @@ contract PublishPaper{
     function deletePaper (string calldata cid) public{
         onlyOwner(cid);
 
-        paperToOwner[cid] = address(0);
+        paperToOwner[cid] = address(0x0);
         Paper memory paper = papers[cidToPaperIndex[cid]];
         paper.timestamp = "";
-        paper.userId = address(0);
+        paper.userId = address(0x0);
         paper.cid = "";
         paper.author = "";
         paper.title = "";
