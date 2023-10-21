@@ -1,4 +1,5 @@
-pragma solidity ^0.8.0;
+// SPDX-License-Identifier: MIT
+pragma solidity >=0.4.22 <0.9.0;
 
 
 // TODO: Can change here to make it struct and eliminate the need of mysql to store info and metadata
@@ -19,6 +20,7 @@ contract PublishPaper{
     mapping ( string => uint) cidToPaperIndex; 
     Paper[] papers;
     uint paperIndex = 0;
+
 
     function onlyOwner(string calldata cid) view public {
         require(msg.sender == paperToOwner[cid]);
@@ -54,8 +56,8 @@ contract PublishPaper{
         paper.dayCompleted = false;
     }
 
-    function getPaper(string calldata cid) public view returns (string memory,address, string memory, string memory, string memory, string memory, bool){
-        return (papers[cidToPaperIndex[cid]].timestamp, papers[cidToPaperIndex[cid]].userId, papers[cidToPaperIndex[cid]].cid, papers[cidToPaperIndex[cid]].author, papers[cidToPaperIndex[cid]].title, papers[cidToPaperIndex[cid]].description, papers[cidToPaperIndex[cid]].dayCompleted);
+    function getPaper(string calldata cid) public view returns (string memory,address, string memory, string memory, string memory, bool){
+        return (papers[cidToPaperIndex[cid]].timestamp, papers[cidToPaperIndex[cid]].userId, papers[cidToPaperIndex[cid]].author, papers[cidToPaperIndex[cid]].title, papers[cidToPaperIndex[cid]].description, papers[cidToPaperIndex[cid]].dayCompleted);
     }
 
     function getPapers() public view returns (Paper[] memory) {
