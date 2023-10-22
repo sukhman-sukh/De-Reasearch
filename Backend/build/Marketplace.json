@@ -1,0 +1,391 @@
+{
+  "contractName": "Marketplace",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "name",
+      "outputs": [
+        {
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.1+commit.c8a2cb62\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"project:/contracts/paper_info.sol\":\"Marketplace\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/paper_info.sol\":{\"keccak256\":\"0xe6a193016dc1815593d4b56481f556ef4b482bc20915f132f26c20147e37eeb5\",\"urls\":[\"bzzr://b08f32fab6687d343bca6b55dc8be3634824e8c4b50d72924ed954109dee2c7c\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506040805190810160405280601b81526020017f4461707020556e6976657273697479204d61726b6574706c61636500000000008152506000908051906020019061005c929190610062565b50610107565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f106100a357805160ff19168380011785556100d1565b828001600101855582156100d1579182015b828111156100d05782518255916020019190600101906100b5565b5b5090506100de91906100e2565b5090565b61010491905b808211156101005760008160009055506001016100e8565b5090565b90565b61019a806101166000396000f3fe60806040526004361061003b576000357c01000000000000000000000000000000000000000000000000000000009004806306fdde0314610040575b600080fd5b34801561004c57600080fd5b506100556100d0565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561009557808201518184015260208101905061007a565b50505050905090810190601f1680156100c25780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b60008054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156101665780601f1061013b57610100808354040283529160200191610166565b820191906000526020600020905b81548152906001019060200180831161014957829003601f168201915b50505050508156fea165627a7a72305820ebc10eb091c6fc17d88196e49184654122c82abf77c389d873f54bb0d4d86f5b0029",
+  "deployedBytecode": "0x60806040526004361061003b576000357c01000000000000000000000000000000000000000000000000000000009004806306fdde0314610040575b600080fd5b34801561004c57600080fd5b506100556100d0565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561009557808201518184015260208101905061007a565b50505050905090810190601f1680156100c25780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b60008054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156101665780601f1061013b57610100808354040283529160200191610166565b820191906000526020600020905b81548152906001019060200180831161014957829003601f168201915b50505050508156fea165627a7a72305820ebc10eb091c6fc17d88196e49184654122c82abf77c389d873f54bb0d4d86f5b0029",
+  "sourceMap": "2270:128:0:-;;;2322:74;8:9:-1;5:2;;;30:1;27;20:12;5:2;2322:74:0;2353:36;;;;;;;;;;;;;;;;;;:4;:36;;;;;;;;;;;;:::i;:::-;;2270:128;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;:::-;;;;;;;",
+  "deployedSourceMap": "2270:128:0:-;;;;;;;;;;;;;;;;;;;;;;2297:18;;8:9:-1;5:2;;;30:1;27;20:12;5:2;2297:18:0;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;2297:18:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity >=0.4.22 <0.9.0;\n\n\n// // TODO: Can change here to make it struct and eliminate the need of mysql to store info and metadata\n// struct Paper {\n//     string timestamp;\n//     address userId;\n//     string cid;\n//     string author;\n//     string title;\n//     string description;\n//     bool dayCompleted;\n// }\n\n\n// contract PublishPaper{\n//     // mapping of cid with user's account id\n//     mapping (string => address) paperToOwner;\n//     mapping ( string => uint) cidToPaperIndex; \n//     Paper[] papers;\n//     uint paperIndex = 0;\n\n//     function onlyOwner(string calldata cid) view public {\n//         require(msg.sender == paperToOwner[cid]);\n//     }\n\n//     function publishPaper (\n//             string memory _timestamp ,\n//             address _userId,\n//             string memory _cid,\n//             string memory _author,\n//             string memory _title,\n//             string memory _description,\n//             bool _dayCompleted \n//         ) public {\n//         paperToOwner[_cid] = _userId;\n//         Paper memory paper = Paper(_timestamp, _userId, _cid, _author, _title, _description, _dayCompleted); \n//         papers.push(paper);\n//         cidToPaperIndex[_cid] = paperIndex;\n//         paperIndex++;\n//     }\n\n//     function deletePaper (string calldata cid) public{\n//         onlyOwner(cid);\n\n//         paperToOwner[cid] = address(0);\n//         Paper memory paper = papers[cidToPaperIndex[cid]];\n//         paper.timestamp = \"\";\n//         paper.userId = address(0);\n//         paper.cid = \"\";\n//         paper.author = \"\";\n//         paper.title = \"\";\n//         paper.description = \"\";\n//         paper.dayCompleted = false;\n//     }\n\n//     function getPaper(string calldata cid) public view returns (string memory,address, string memory, string memory, string memory, bool){\n//         return (papers[cidToPaperIndex[cid]].timestamp, papers[cidToPaperIndex[cid]].userId, papers[cidToPaperIndex[cid]].author, papers[cidToPaperIndex[cid]].title, papers[cidToPaperIndex[cid]].description, papers[cidToPaperIndex[cid]].dayCompleted);\n//     }\n\n//     function getPapers() public view returns (Paper[] memory) {\n//         return (papers);\n//     }\n// }\n\n\n// pragma solidity ^0.5.0;\n\ncontract Marketplace {\n    string public name;\n\n    constructor() public {\n        name = \"Dapp University Marketplace\";\n    }\n}",
+  "sourcePath": "/home/death/Desktop/linux backup/sdsLabs/De-Reasearch/Backend/contracts/paper_info.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/paper_info.sol",
+    "exportedSymbols": {
+      "Marketplace": [
+        12
+      ]
+    },
+    "id": 13,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".22",
+          "<",
+          "0.9",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:32:0"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 12,
+        "linearizedBaseContracts": [
+          12
+        ],
+        "name": "Marketplace",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 3,
+            "name": "name",
+            "nodeType": "VariableDeclaration",
+            "scope": 12,
+            "src": "2297:18:0",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_string_storage",
+              "typeString": "string"
+            },
+            "typeName": {
+              "id": 2,
+              "name": "string",
+              "nodeType": "ElementaryTypeName",
+              "src": "2297:6:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_string_storage_ptr",
+                "typeString": "string"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 10,
+              "nodeType": "Block",
+              "src": "2343:53:0",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 8,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 6,
+                      "name": "name",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 3,
+                      "src": "2353:4:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_storage",
+                        "typeString": "string storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "hexValue": "4461707020556e6976657273697479204d61726b6574706c616365",
+                      "id": 7,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "2360:29:0",
+                      "subdenomination": null,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_da4b6052d4e2657e92b9e8ac7ae34efe0016cdd765c6837ed00d7314b2dd8f36",
+                        "typeString": "literal_string \"Dapp University Marketplace\""
+                      },
+                      "value": "Dapp University Marketplace"
+                    },
+                    "src": "2353:36:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage",
+                      "typeString": "string storage ref"
+                    }
+                  },
+                  "id": 9,
+                  "nodeType": "ExpressionStatement",
+                  "src": "2353:36:0"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 11,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 4,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2333:2:0"
+            },
+            "returnParameters": {
+              "id": 5,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2343:0:0"
+            },
+            "scope": 12,
+            "src": "2322:74:0",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 13,
+        "src": "2270:128:0"
+      }
+    ],
+    "src": "32:2366:0"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "project:/contracts/paper_info.sol",
+      "exportedSymbols": {
+        "Marketplace": [
+          12
+        ]
+      }
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            ">=",
+            "0.4",
+            ".22",
+            "<",
+            "0.9",
+            ".0"
+          ]
+        },
+        "id": 1,
+        "name": "PragmaDirective",
+        "src": "32:32:0"
+      },
+      {
+        "attributes": {
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "contract",
+          "documentation": null,
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            12
+          ],
+          "name": "Marketplace",
+          "scope": 13
+        },
+        "children": [
+          {
+            "attributes": {
+              "constant": false,
+              "name": "name",
+              "scope": 12,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "string",
+              "value": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "string",
+                  "type": "string"
+                },
+                "id": 2,
+                "name": "ElementaryTypeName",
+                "src": "2297:6:0"
+              }
+            ],
+            "id": 3,
+            "name": "VariableDeclaration",
+            "src": "2297:18:0"
+          },
+          {
+            "attributes": {
+              "documentation": null,
+              "implemented": true,
+              "isConstructor": true,
+              "kind": "constructor",
+              "modifiers": [
+                null
+              ],
+              "name": "",
+              "scope": 12,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 4,
+                "name": "ParameterList",
+                "src": "2333:2:0"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 5,
+                "name": "ParameterList",
+                "src": "2343:0:0"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "string storage ref"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 3,
+                              "type": "string storage ref",
+                              "value": "name"
+                            },
+                            "id": 6,
+                            "name": "Identifier",
+                            "src": "2353:4:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "hexvalue": "4461707020556e6976657273697479204d61726b6574706c616365",
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "subdenomination": null,
+                              "token": "string",
+                              "type": "literal_string \"Dapp University Marketplace\"",
+                              "value": "Dapp University Marketplace"
+                            },
+                            "id": 7,
+                            "name": "Literal",
+                            "src": "2360:29:0"
+                          }
+                        ],
+                        "id": 8,
+                        "name": "Assignment",
+                        "src": "2353:36:0"
+                      }
+                    ],
+                    "id": 9,
+                    "name": "ExpressionStatement",
+                    "src": "2353:36:0"
+                  }
+                ],
+                "id": 10,
+                "name": "Block",
+                "src": "2343:53:0"
+              }
+            ],
+            "id": 11,
+            "name": "FunctionDefinition",
+            "src": "2322:74:0"
+          }
+        ],
+        "id": 12,
+        "name": "ContractDefinition",
+        "src": "2270:128:0"
+      }
+    ],
+    "id": 13,
+    "name": "SourceUnit",
+    "src": "32:2366:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.1+commit.c8a2cb62.Emscripten.clang"
+  },
+  "networks": {
+    "1697776185040": {
+      "events": {},
+      "links": {},
+      "address": "0x4ed36C2FaF99e4fa4d3d60a5C6cF9f5F9125Cad6",
+      "transactionHash": "0xf6efefc4941d5f7afd299322aef2f900cf1aad4b0b1a2fd68fb328891353e834"
+    }
+  },
+  "schemaVersion": "3.4.16",
+  "updatedAt": "2023-10-20T04:35:27.063Z",
+  "networkType": "ethereum",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
