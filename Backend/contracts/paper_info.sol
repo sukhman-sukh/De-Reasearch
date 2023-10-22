@@ -13,12 +13,11 @@ struct Paper {
 }
 
 contract PublishPaper{
-    // mapping of cid with user's account id
+   // mapping of cid with user's account id
     mapping (string => address) paperToOwner;
     mapping ( string => uint) cidToPaperIndex; 
     Paper[] papers;
     uint paperIndex = 0;
-
 
     function onlyOwner(string calldata cid) view public {
         require(msg.sender == paperToOwner[cid]);
@@ -43,10 +42,10 @@ contract PublishPaper{
     function deletePaper (string calldata cid) public{
         onlyOwner(cid);
 
-        paperToOwner[cid] = address(0);
+        paperToOwner[cid] = address(0x0);
         Paper memory paper = papers[cidToPaperIndex[cid]];
         paper.timestamp = "";
-        paper.userId = address(0);
+        paper.userId = address(0x0);
         paper.cid = "";
         paper.author = "";
         paper.title = "";
