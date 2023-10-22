@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { Button } from "@mantine/core";
 import { ChevronUpIcon, ChevronDownIcon } from "@radix-ui/react-icons";
+import Header from "@/components/Header";
 
 export default function PaperPage() {
     const router = useRouter();
@@ -18,11 +19,13 @@ export default function PaperPage() {
     };
 
     return (
+        <>
+        <Header />
+        <div 
+        style={{marginTop: "15rem"}}
+        >
         <div className="flex flex-row items-center justify-center min-h-screen py-2">
             <main className="flex flex-row items-center justify-center w-full flex-1 px-20 text-center">
-                {false ? (
-                    <p>Loading...</p>
-                ) : (
                     <>
                         <div className="flex-col items-center justify-center mt-5 space-x-4">
                             <Button
@@ -46,8 +49,9 @@ export default function PaperPage() {
                             className="w-3/5 h-screen mt-5"
                         />
                     </>
-                )}
             </main>
         </div>
+        </div>
+        </>
     );
 }
