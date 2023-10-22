@@ -2,7 +2,6 @@
 pragma solidity >=0.4.22 <0.9.0;
 
 
-// TODO: Can change here to make it struct and eliminate the need of mysql to store info and metadata
 struct Paper {
     string timestamp;
     address userId;
@@ -12,7 +11,6 @@ struct Paper {
     string description;
     bool dayCompleted;
 }
-
 
 contract PublishPaper{
     // mapping of cid with user's account id
