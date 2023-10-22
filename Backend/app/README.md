@@ -1,70 +1,56 @@
-# Getting Started with Create React App
+# Web3Auth Integration with UserOp.js Using Next.js
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This demonstration application illustrates how to integrate self-custodial social authentication with [Web3Auth](https://web3auth.io/) and [userop.js](https://github.com/stackup-wallet/userop.js).
 
-## Available Scripts
+## Getting Started
 
-In the project directory, you can run:
+Clone this repository to your local machine.
 
-### `npm start`
+### Prerequisites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Node.js installed on your system.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- An account with Web3Auth ([https://web3auth.io/](https://web3auth.io/)) to get a client ID token.
 
-### `npm test`
+- An account with Stackup ([https://app.stackup.sh/](https://app.stackup.sh/)) to get a RPC URL.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Configuration
 
-### `npm run build`
+The application uses environment variables for configuration.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1.  Copy the `.env.example` file into a new `.env.local` file:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    ```bash
+    cp .env.example .env.local
+    ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2.  Open the `.env.local` file and add your Web3Auth client ID and Stackup RPC URL:
 
-### `npm run eject`
+```bash
+WEB3AUTH_CLIENT_ID=Your_Web3Auth_Client_ID
+STACKUP_RPC_URL=Your_Stackup_RPC_URL`
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Install Dependencies
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Install all dependencies by running the following command:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+npm install
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Run the Application
 
-## Learn More
+You can start the application with the following command:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+npm run dev
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The application should now be running at [http://localhost:3000](http://localhost:3000/).
 
-### Code Splitting
+## Conclusion
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+This demonstration app provides a great starting point for integrating self-custodial social authentication into your Ethereum DApp. By utilizing Web3Auth and UserOp.js along with Next.js, it's possible to create a more user-friendly and secure DApp experience.
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+For further information and help, feel free to raise an issue in this repository.
